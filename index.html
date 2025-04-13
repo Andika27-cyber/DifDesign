@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DIF DESIGN</title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- AlpineJS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- App -->
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+    <!-- Navbar start -->
+
+    <nav class="navbar" x-data>
+      <a href="#" class="navbar-logo">DIF<span> DESIGN</span>.</a>
+
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+
+        <a href="#about">Tentang Kami</a>
+
+        <a href="#menu">Example</a>
+
+        <a href="#products">Products</a>
+
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-badge"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
+          ></span>
+        </a>
+
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- Search Form Start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form End -->
+
+      <!-- Shopping cart Start -->
+      <div class="shopping-cart">
+        <template x-for="(item, index) in $store.cart.items" x-keys="index">
+          <div class="cart-item">
+            <img :src="`img/${item.img}`" :alt="item.name" />
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <span x-text="rupiah(item.price)"></span> &times;
+                <button id="remove" @click="$store.cart.remove(item.id)">
+                  &minus;
+                </button>
+                <span x-text="item.quantity"></span>
+                <button id="add" @click="$store.cart.add(item)">&plus;</button>
+                &equals;
+                <span x-text="item.total"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+        <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem">
+          Cart is Empty
+        </h4>
+        <h4 x-show="$store.cart.items.length">
+          Total : <span x-text="rupiah($store.cart.total)"></span>
+        </h4>
+
+        <div class="form-container" x-show="$store.cart.items.length">
+          <form action="" id="checkoutForm">
+            <h5>Costemer Detail</h5>
+
+            <label for="name">
+              <span>Name</span>
+              <input type="text" name="name" id="name" />
+            </label>
+
+            <label for="phone">
+              <span>Phone</span>
+              <input type="phone" name="phone" id="phone" />
+            </label>
+
+            <label for="email">
+              <span>Email</span>
+              <input type="email" name="email" id="email" />
+            </label>
+
+            <button
+              class="checkout-button"
+              type="submit"
+              id="checkout-button"
+              value="Checkout"
+            >
+              Checkout
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Shopping cart End -->
+
+    <!-- Navbar end -->
+
+    <!-- Hero Section Start -->
+
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>Don't Forget To <span>Smile</span> Every Day</h1>
+
+        <p>
+          Design is an expression of purpose, and may (if it is good enough)
+          eventually be called art; The design depends on how big the
+          limitations are and what the method is (there will always be
+          limitations and they are usually included in ethics).
+        </p>
+      </main>
+    </section>
+
+    <!-- Hero Section End -->
+
+    <!-- About Section Start -->
+
+    <section id="about" class="about">
+      <h2><span>Tentang</span> Kami</h2>
+
+      <div class="row">
+        <div class="about-img">
+          <img src="img/main9.png" alt="Tentang Kami" />
+        </div>
+
+        <div class="content">
+          <h3>Kenapa Memilih Kami?</h3>
+
+          <p>
+            DIF DESIGN is a graphic designer that has been around since two
+            thousand and twenty with the initial name 27Production.
+          </p>
+
+          <p>
+            And in the beginning we only accepted logo designs. Now we have
+            accepted designs such as t-shirts, banners, etc.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section End -->
+
+    <!-- Menu Section Start -->
+
+    <section id="menu" class="menu">
+      <h2><span>Design</span> Example</h2>
+
+      <p>
+        Some examples of our designs and we guarantee they will not disappoint
+        you.
+      </p>
+
+      <div class="row">
+        <div class="menu-card">
+          <img src="img/p1.png" alt="Kaos Mentah" class="menu-card-img" />
+
+          <h3 class="menu-card-tittle">- Kaos Mentah -</h3>
+
+          <p class="menu-card-price">IDR 100K</p>
+        </div>
+
+        <div class="menu-card">
+          <img src="img/p2.png" alt="Kaos" class="menu-card-img" />
+
+          <h3 class="menu-card-tittle">- Kaos -</h3>
+
+          <p class="menu-card-price">IDR 150K</p>
+        </div>
+
+        <div class="menu-card">
+          <img src="img/p3.png" alt="Logo" class="menu-card-img" />
+
+          <h3 class="menu-card-tittle">- Logo -</h3>
+
+          <p class="menu-card-price">IDR 50K</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section End -->
+
+    <!-- Products Section Start -->
+    <section class="products" id="products" x-data="products">
+      <h2><span>Produk Unggulan</span> Kami</h2>
+      <p>Our featured products that you can order</p>
+
+      <div class="row">
+        <template x-for="(item, index) in items" x-key="index">
+          <div class="product-card">
+            <div class="product-icons">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#shopping-cart" />
+                </svg>
+              </a>
+              <a href="#" @click.prevent="$store.modal.open(item)"> </a>
+            </div>
+            <div class="product-img">
+              <img :src="`img/${item.img}`" :alt="item.name" />
+            </div>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div class="product-stars">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="img/feather-sprite.svg#star" />
+                </svg>
+              </div>
+              <div class="product-price">
+                <span x-text="rupiah(item.price)"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- Products Section End -->
+
+    <!-- Contact Section Start -->
+
+    <section id="contact" class="contact">
+      <h2><span>Kontak</span> Kami</h2>
+
+      <p>You can contact us politely through the contact listed below.</p>
+
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31638.48408496669!2d111.88349191284836!3d-7.595591575566948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e784a53eb37a0e1%3A0x4027a76e35318b0!2sNganjuk%2C%20Kec.%20Nganjuk%2C%20Kabupaten%20Nganjuk%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1744427432635!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
+
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+
+            <input type="text" placeholder="Nama" />
+          </div>
+
+          <div class="input-group">
+            <i data-feather="mail"></i>
+
+            <input type="text" placeholder="Email" />
+          </div>
+
+          <div class="input-group">
+            <i data-feather="phone"></i>
+
+            <input type="text" placeholder="No - Heandphone" />
+          </div>
+
+          <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact Section End -->
+
+    <!-- Footer Start -->
+
+    <footer>
+      <div class="socials">
+        <a href="#"><i data-feather="instagram"></i></a>
+
+        <a href="#"><i data-feather="twitter"></i></a>
+
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+
+        <a href="#about">Tentang Kami</a>
+
+        <a href="#menu">Example</a>
+
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">DifDsgn</a>. | &copy; 2025.</p>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Feather Icons -->
+
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- My Javascript -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
